@@ -1,0 +1,59 @@
+
+export const products = [
+    {
+      id: 1,
+      name: "Wireless Earbuds",
+      description: "High-quality sound with noise cancellation.",
+      price: 50000,
+      image: "/images/1.jpg",
+    },
+    {
+      id: 2,
+      name: "Smartphone X12",
+      description: "Experience the latest technology in your hands.",
+      price: 20000,
+      image: "/images/2.jpg",
+    },
+    {
+      id: 3,
+      name: "Smartwatch Pro",
+      description: "Track your fitness and stay connected.",
+      price: 40000,
+      image: "/images/3.jpg",
+    },
+    {
+      id: 4,
+      name: "Gaming Laptop",
+      description: "Powerful gaming performance for enthusiasts.",
+      price: 60000,
+      image: "/images/4.jpg",
+    },
+    {
+      id: 5,
+      name: "Bluetooth Speaker",
+      description: "Crystal clear sound with deep bass.",
+      price: 10000,
+      image: "/images/5.jpg",
+    },
+    {
+      id: 6,
+      name: "4K Smart TV",
+      description: "Immersive viewing with vibrant colors.",
+      price: 100000,
+      image: "/images/6.jpg",
+    },
+    {
+      id: 7,
+      name: "Wireless Keyboard",
+      description: "Ergonomic design with long battery life.",
+      price: 5000,
+      image: "/images/7.jpg",
+    },
+    {
+      id: 8,
+      name: "Drone X1",
+      description: "Capture stunning aerial photos and videos.",
+      price: 100000,
+      image: "/images/8.jpg",
+    },
+  ];
