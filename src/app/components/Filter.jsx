@@ -57,9 +57,13 @@ const Filter = () => {
     });
     setProducts(filtered);
     // setPopup(false);
-    
-    
   };
+
+  function handleClearFilter(){
+    setProductPrice("");
+    setProductDiscount(0);
+    setProductRating(0);
+  }
   
 
 
@@ -111,9 +115,9 @@ const Filter = () => {
             </div>
         </div>
 
-        {/* <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" onClick={handleFilter}>
-          Apply Filters
-        </button> */}
+         <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" onClick={handleClearFilter}>
+          Clear Filter
+        </button>
       </div>
     </div>
   );

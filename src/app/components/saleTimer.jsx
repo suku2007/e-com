@@ -40,8 +40,8 @@ function SaleTimer() {
     const seconds = timer % 60;
 
     return (
-        <div className="flex flex-col items-center justify-center p-4 bg-red-500 text-white rounded-lg shadow-md">
-            <p className="text-lg font-semibold">Sale Starts In</p>
+        <div className="flex flex-col items-center justify-center p-4 bg-black text-white rounded-lg shadow-md">
+            <p className="text-lg font-semibold">Sale Ends In</p>
             <div className="flex space-x-2 text-xl font-bold mt-2">
                 <span className="bg-white text-red-500 px-3 py-1 rounded-md shadow">{hours}h</span>
                 <span className="bg-white text-red-500 px-3 py-1 rounded-md shadow">{minutes}m</span>
