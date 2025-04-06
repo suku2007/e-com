@@ -52,8 +52,10 @@ function ProductCard({product}){
         <Image width={400} height={400} src={product.image} alt="Product Name" className="w-full  object-cover"/>
         <div className="p-4">
             <h2 className="text-lg font-semibold">{product.name} </h2>
-            <p className="text-gray-500">{product.description} </p>
-            <p className="text-gray-600">{product.price}</p>
+            {/* <p className="text-gray-500">{product.description} </p> */}
+            <p className="text-gray-600">Price:<span className="text-red-600"> Rs {product.price}</span></p>
+            <p className="text-gray-600">Customer Rating: <span className="text-red-600">{product.customerRating} / 5</span></p>
+            <p className="text-gray-600">Discount: <span className="text-red-600">{product.discount}%</span></p>
             <div className="flex gap-1">
             <button onClick={()=> handleAddProduct(product)} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 grow">Add to Cart</button> 
             <button onClick={()=> handleClick(product)} className={`mt-4 bg-${getColor(product)}-500 text-white py-2 px-4 rounded-lg hover:bg-${getColor(product)}-600`}><FontAwesomeIcon icon={faHeart}/></button>

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faFilter} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faFilter, faXmark} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react";
 import { useAppContext } from "./ContextProvider";
 import { products as dataProducts } from "../data"; 
@@ -8,7 +8,7 @@ import Filter from "./Filter";
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [popUp, setPopup] = useState(false);
-  const {setProducts} = useAppContext();
+   const {setProducts, productPrice, setProductPrice, productDiscount, setProductDiscount, productRating, setProductRating} = useAppContext();
 
   useEffect(()=>{
     const searchedProducts = dataProducts.filter((item, index)=> {
@@ -26,6 +26,12 @@ const SearchBar = () => {
     setPopup(true);
 
   }
+  function handleClearFilter(){
+    setProducts(dataProducts);
+    setProductPrice("");
+    setProductDiscount(0);
+    setProductRating(0);
+  }
 
   return (
     <div className="flex items-center ml-auto gap-2 p-4 bg-white shadow-md rounded-xl w-full max-w-md">
@@ -41,12 +47,17 @@ const SearchBar = () => {
         {/* <FaSearch  /> */}
       </div>
       <button className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick= {handleShowFilter}><FontAwesomeIcon icon={faFilter} /></button>
-
-      {popUp && <div className="fixed inset-0 grid  place-items-center backDropColor">
+      {
+        productPrice || productDiscount || productRating ?
+        <button className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={handleClearFilter}><FontAwesomeIcon icon={faXmark} /></button>
+        : ""
+      }
+      {popUp && <div className={`fixed inset-0 grid  place-items-center backDropColor`}>
             <div className="relative">
                 <button className="absolute top-3 right-3 bg-red-500 p-2 text-white rounded" onClick={()=>setPopup(false)}>X</button>
                 <Filter/>
             </div>
+            
             
       </div>}
     </div>

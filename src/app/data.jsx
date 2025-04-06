@@ -6,6 +6,8 @@ export const products = [
       description: "High-quality sound with noise cancellation.",
       price: 50000,
       image: "/images/1.jpg",
+      customerRating: 4.5,
+      discount: 10,
     },
     {
       id: 2,
@@ -13,6 +15,8 @@ export const products = [
       description: "Experience the latest technology in your hands.",
       price: 20000,
       image: "/images/2.jpg",
+      customerRating: 4,
+      discount: 10,
     },
     {
       id: 3,
@@ -20,6 +24,8 @@ export const products = [
       description: "Track your fitness and stay connected.",
       price: 40000,
       image: "/images/3.jpg",
+      customerRating: 3.5,
+      discount: 20,
     },
     {
       id: 4,
@@ -27,6 +33,8 @@ export const products = [
       description: "Powerful gaming performance for enthusiasts.",
       price: 60000,
       image: "/images/4.jpg",
+      customerRating: 3,
+      discount: 30,
     },
     {
       id: 5,
@@ -34,6 +42,8 @@ export const products = [
       description: "Crystal clear sound with deep bass.",
       price: 10000,
       image: "/images/5.jpg",
+      customerRating: 3.5,
+      discount: 30,
     },
     {
       id: 6,
@@ -41,13 +51,17 @@ export const products = [
       description: "Immersive viewing with vibrant colors.",
       price: 100000,
       image: "/images/6.jpg",
+      customerRating: 4,
+      discount: 50,
     },
     {
       id: 7,
       name: "Wireless Keyboard",
       description: "Ergonomic design with long battery life.",
-      price: 5000,
+      price: 5000,  
       image: "/images/7.jpg",
+      customerRating: 4.5,
+      discount: 50,
     },
     {
       id: 8,
@@ -55,5 +69,7 @@ export const products = [
       description: "Capture stunning aerial photos and videos.",
       price: 100000,
       image: "/images/8.jpg",
+      customerRating: 3.5,
+      discount: 20,
     },
   ];
