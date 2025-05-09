@@ -17,8 +17,8 @@ export const AppProvider = ({ children }) => {
       const lsWishedProducts = localStorage.getItem("wishedProducts")
       const lsCartProducts = localStorage.getItem("cartProducts")
 
-      const storagedWishedProducts = JSON.parse(lsWishedProducts || [])
-      const storagedCartProducts = JSON.parse(lsCartProducts || [])
+      const storagedWishedProducts = JSON.parse(lsWishedProducts || '[]')
+      const storagedCartProducts = JSON.parse(lsCartProducts || '[]')
       
       setWishlist(storagedWishedProducts);
       setCart(storagedCartProducts);
