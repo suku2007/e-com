@@ -1,7 +1,6 @@
 import ProductCard from "./ProductCard";
 import { useAppContext } from "./ContextProvider";
 import { useEffect } from "react";
-import SaleTimer from "./saleTimer";
 import SearchBar from "./SearchBar";
 
 
@@ -24,7 +23,6 @@ function Project(){
     return(
       
         <>
-        <SaleTimer/>
         <div className="container mt-4"><SearchBar/></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-6 container mx-auto">
           {/* items in cart = {cart.length} */}
