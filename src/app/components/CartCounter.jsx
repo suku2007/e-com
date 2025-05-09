@@ -1,5 +1,4 @@
 "use client"
-import { useState } from "react";
 import { useAppContext } from "./ContextProvider";
 
 function CartCounter({product}){

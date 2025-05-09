@@ -25,6 +25,9 @@ function Wishlist(){
         }
 
         }
+        
+
+
     return(
             <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-5">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">My Wishlist</h1>
@@ -34,7 +37,7 @@ function Wishlist(){
                             <Image  width={400} height={400}  src={product.image} alt="Product" className="w-24 h-24 rounded-lg"/>
                             <div className="ml-4 flex-1">
                                 <h2 className="text-lg font-semibold text-gray-700">{product.name}</h2>
-                                <p className="text-gray-500">{product.price}</p>
+                                <p className="text-gray-500">Rs. {product.price}</p>
                             </div>
                             <div className="flex gap-2">
                                 <button onClick={()=> handleDelete(index)} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Remove</button>

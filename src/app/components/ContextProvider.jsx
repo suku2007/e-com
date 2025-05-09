@@ -1,5 +1,5 @@
 "use client"; 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { products as dataProduct } from "../data";
 
 const AppContext = createContext();
@@ -11,6 +11,32 @@ export const AppProvider = ({ children }) => {
     const [productPrice, setProductPrice] = useState('');
     const [productDiscount, setProductDiscount] = useState(0);
     const [productRating, setProductRating] = useState(0);
+ 
+// wishlist localStorage
+    useEffect(()=>{
+      const lsWishedProducts = localStorage.getItem("wishedProducts")
+      const lsCartProducts = localStorage.getItem("cartProducts")
+
+      const storagedWishedProducts = JSON.parse(lsWishedProducts || [])
+      const storagedCartProducts = JSON.parse(lsCartProducts || [])
+      
+      setWishlist(storagedWishedProducts);
+      setCart(storagedCartProducts);
+    }, [])
+
+    useEffect(()=>{
+      localStorage.setItem("wishedProducts", JSON.stringify(wishlist))
+      localStorage.setItem("cartProducts", JSON.stringify(cart))
+
+    }, [wishlist, cart])
+
+    // cart localStorage
+
+
+
+    
+
+
 
   return (
     <AppContext.Provider value={{ 

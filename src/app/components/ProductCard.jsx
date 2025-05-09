@@ -9,7 +9,7 @@ function ProductCard({product}){
 
     const {cart, setCart, wishlist, setWishlist} = useAppContext();
  
-    function handleAddProduct(product){
+    function handleAddProduct(product){  
         const existingProduct = cart.find((item)=> item.id == product.id);
         if(existingProduct){
             const indexofexistingProduct = cart.indexOf(existingProduct);
