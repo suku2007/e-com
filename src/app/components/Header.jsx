@@ -3,10 +3,18 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
 import { useAppContext } from './ContextProvider';
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
+  const pathname = usePathname();
   const { cart, wishlist} = useAppContext();
+  const showFrontendHeader = (pathname != '/login') && (pathname != '/signup');
+  const showAdminHeader = pathname.includes('/admin');
+
  return (
+  showAdminHeader?
+  <div>Admin header</div> :
+  showFrontendHeader?
     <header className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
       {/* Logo Section */}
       <Link href="/" className="text-xl font-bold text-gray-800">
@@ -34,8 +42,11 @@ const Header = () => {
           </span> 
         </Link>
         <Link href="/account" className="text-gray-600 hover:text-gray-900">Account</Link>
+        <Link href="/login" className="text-gray-600 hover:text-gray-900">Login</Link>
+
       </div>
-    </header>
+    </header>:
+    <div></div>
   );
 };
 
