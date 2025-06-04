@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
 import { useAppContext } from './ContextProvider';
 import { usePathname } from 'next/navigation'
+import AdminSideMenu from './adminHeader/AdminSideMenu';
+import AdminHeader from './adminHeader/AdminHeader';
 
 const Header = () => {
   const pathname = usePathname();
@@ -13,7 +15,12 @@ const Header = () => {
 
  return (
   showAdminHeader?
-  <div>Admin header</div> :
+  <>
+  <AdminHeader/>
+  <AdminSideMenu/>
+  
+  </>
+   :
   showFrontendHeader?
     <header className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
       {/* Logo Section */}
