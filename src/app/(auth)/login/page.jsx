@@ -2,87 +2,78 @@
 import { faEyeSlash, faEye  } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 
 function page(){
 
-    const[email, setEmail] = useState("");
-    const[password, setPassword] = useState("");
-    const[openPassword, setOpenPassword] = useState(false);
-    const[submitted, setSubmitted] = useState(false);
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const router = useRouter();
-
-
-    function handleEmail(e){
-        setEmail(e.target.value);
-        if(submitted){
-          setTimeout(() => {
-            validateEmail();
-          }, 1000);
-   
-        }
-    }
-    function handlePassword(e){
-        setPassword(e.target.value);
-        if(submitted){
-          setTimeout(() => {
-            validatePassword();
-          }, 1000);
-        }
-    }
-    function togglePassword(){
-        setOpenPassword(!openPassword);
-    }
-    function submitForm(e){
-      e.preventDefault();
-      const isPasswordValid = validatePassword();
-      const isEmailValid = validateEmail();
-      setSubmitted(true);
-      if(isPasswordValid && isEmailValid){
-        if((email == "sukanya@gmail.com") && (password == "sukanya123")){
-          router.push('/admin');
-
+   const[submitted, setSubmitted] = useState(false);
+   const[openPassword, setOpenPassword] = useState(false);
+   const[loading, setLoading] = useState(false);
+   const[formdata, setFormData] = useState({});
+  
+   function handleChange(e){
+     setFormData({...formdata, [e.target.name]:e.target.value});
+   }
+    
+   function showError(inputType){
+      if(inputType == 'email'){
+        const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(emailFormat.test(formdata?.email)){
+          return false;
         }else{
-          alert("invalid credential");
-          setEmail('');
-          setPassword('');
+          return 'Please enter a valid email address.';
+        }
+      }else{
+        if(formdata?.password?.length > 6){
+          return false;
+        }else if(formdata?.password?.length == 0){
+          return 'enter password';
+        }else{
+           return 'password must be more than 6 letters';
         }
       }
-      
-       
-    }
+   }
 
-    function validateEmail(){
-       const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-       console.log(email);
-        if(emailFormat.test(email)){
-          setEmailError('');
-          return true;
-        }else{
-          setEmailError('Please enter a valid email address.');
-          return false;
-        }
+   const emailError = showError('email');
+   const passwordError = showError('password');
+
+  function submitForm(e){
+    e.preventDefault();
+    setSubmitted(true);
+    if(!emailError && !passwordError){
+      login();
     }
-      function validatePassword(){
-        if(password.length > 6){
-          setPasswordError('');
-          return true;
-        }else if(password.length == 0){
-          setPasswordError('enter password');
-           return false;
-        }else{
-          setPasswordError('password must be more than 6 letters');
-           return false;
-        }
-    }
+   }
+
+   async function login(){
+    setLoading(true);
+      const resp = await fetch('https://ecom.zoparet.com/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*/*'
+        },
+        body: JSON.stringify(formdata),
+      });
+      const response = await resp.json();
+      setLoading(false);
+      if(response?.success){
+        //context me user data daalenge
+        toast.success("Successfully logged in.");
+        //navigate karenge admin panel pe
+      }else{
+        toast.error(response?.message?.toString() ?? "something went wrong.");
+      }
+      console.log(response);
+   }
 
 
    return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+      {
+        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form className="space-y-5" onSubmit={submitForm}>
           <div>
@@ -91,41 +82,46 @@ function page(){
             </label>
             <input
               type="text"
-              id="email"
               name="email"
-              value={email}
-              onChange={handleEmail}
+              onChange={handleChange}
               className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {emailError && <p className="text-red-300">{emailError}</p>}
+            {(emailError && submitted) && <p className="text-red-600">{emailError}</p>}
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
             </label>
-             <div style={{ display: 'flex', alignItems: 'center' }}>
+             <div>
                 <input
                 type={openPassword ? 'text' : 'password'}
                 id="password"
                 name="password"
-                value={password}
-                onChange={handlePassword}
+                onChange={handleChange}
                 className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <FontAwesomeIcon icon={openPassword ? faEye : faEyeSlash} onClick={togglePassword} style={{ marginLeft: '-1.5rem', cursor: 'pointer' }}
+                <FontAwesomeIcon icon={openPassword ? faEye : faEyeSlash} onClick={()=>setOpenPassword(!openPassword)} style={{ marginLeft: '-1.5rem', cursor: 'pointer' }}
                 />
-                {passwordError && <p className="text-red-300">{passwordError}</p>}
-
+              {(passwordError && submitted) && <p className="text-red-600">{passwordError}</p>}
             </div>
           </div>
+          {loading ? 
+          <button
+            type="button"
+            className="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition">
+            Loading
+          </button>
+           :
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-          >
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
             Log In
           </button>
+}
         </form>
-      </div>
+        </div>
+      }
+      <ToastContainer />
     </div>
   );
 }

@@ -6,10 +6,12 @@ import { useAppContext } from './ContextProvider';
 import { usePathname } from 'next/navigation'
 import AdminSideMenu from './adminHeader/AdminSideMenu';
 import AdminHeader from './adminHeader/AdminHeader';
+import { useEffect } from 'react';
 
 const Header = () => {
   const pathname = usePathname();
   const { cart, wishlist} = useAppContext();
+
   const showFrontendHeader = (pathname != '/login') && (pathname != '/signup');
   const showAdminHeader = pathname.includes('/admin');
 
