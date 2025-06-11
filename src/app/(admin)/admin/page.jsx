@@ -4,8 +4,7 @@ import AdminSideMenu from "@/app/components/adminHeader/AdminSideMenu";
 function page(){
     return(
         <>
-        <AdminSideMenu/>
-        <AdminHeader/>
+        <p>Dashboard</p>
         </>
     )
 }

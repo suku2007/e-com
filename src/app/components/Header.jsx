@@ -3,17 +3,29 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
 import { useAppContext } from './ContextProvider';
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import AdminSideMenu from './adminHeader/AdminSideMenu';
 import AdminHeader from './adminHeader/AdminHeader';
 import { useEffect } from 'react';
 
 const Header = () => {
+  const router = useRouter();
   const pathname = usePathname();
-  const { cart, wishlist} = useAppContext();
+  const { cart, wishlist, user} = useAppContext();
 
   const showFrontendHeader = (pathname != '/login') && (pathname != '/signup');
   const showAdminHeader = pathname.includes('/admin');
+
+  useEffect(()=>{
+    console.log(user);
+    if((pathname == '/login') && user){
+      
+        router.push('/admin');
+        
+    }else if(pathname.includes('/admin') && !user){
+        router.push('/login');
+    }
+  }, [pathname, user])
 
  return (
   showAdminHeader?

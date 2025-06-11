@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import Header from "./components/Header";
 import { AppProvider } from "./components/ContextProvider";
 import { headers } from 'next/headers';
+import ShowChildren from "./components/showChildren";
 
 config.autoAddCss = false
 
@@ -29,9 +30,9 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AppProvider>
-          
           <Header/>
-          {children}
+          {/* {children} */}
+          <ShowChildren children = {children}/>
         </AppProvider>
       </body>
     </html>

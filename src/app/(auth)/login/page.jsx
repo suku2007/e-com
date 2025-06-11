@@ -1,4 +1,5 @@
 "use client"
+import { useAppContext } from "@/app/components/ContextProvider";
 import { faEyeSlash, faEye  } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
@@ -7,11 +8,13 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 function page(){
+  const router = useRouter();
 
    const[submitted, setSubmitted] = useState(false);
    const[openPassword, setOpenPassword] = useState(false);
    const[loading, setLoading] = useState(false);
-   const[formdata, setFormData] = useState({});
+    const[formdata, setFormData] = useState({});
+   const { setUser, setToken} = useAppContext();
   
    function handleChange(e){
      setFormData({...formdata, [e.target.name]:e.target.value});
@@ -49,7 +52,7 @@ function page(){
 
    async function login(){
     setLoading(true);
-      const resp = await fetch('https://ecom.zoparet.com/auth/login', {
+      const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,13 +63,14 @@ function page(){
       const response = await resp.json();
       setLoading(false);
       if(response?.success){
-        //context me user data daalenge
+        setUser(response.user);
+        setToken(response.token);
         toast.success("Successfully logged in.");
-        //navigate karenge admin panel pe
+        router.push('/admin');
       }else{
         toast.error(response?.message?.toString() ?? "something went wrong.");
       }
-      console.log(response);
+      
    }
 
 

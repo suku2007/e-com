@@ -25,3 +25,5 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .backDropColor{background-color: #0a0a0a86; }
+
+.adminContentWrapper{width: calc(100% - 256px); margin-left: auto;}
