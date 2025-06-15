@@ -63,8 +63,10 @@ const Header = () => {
           </span> 
         </Link>
         <Link href="/account" className="text-gray-600 hover:text-gray-900">Account</Link>
+        {user? 
+        <Link href="/admin" className="text-gray-600 hover:text-gray-900">{user.name}</Link> : 
         <Link href="/login" className="text-gray-600 hover:text-gray-900">Login</Link>
-
+        }
       </div>
     </header>:
     <div></div>

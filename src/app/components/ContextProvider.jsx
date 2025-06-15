@@ -37,6 +37,12 @@ export const AppProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(user))
       localStorage.setItem("token", token)
 
+      if (token) {
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+        document.cookie = `Authentication=${token}; expires=${expires.toUTCString()}; path=/`;
+      }
+
     }, [wishlist, cart, token, user])
 
     // cart localStorage
