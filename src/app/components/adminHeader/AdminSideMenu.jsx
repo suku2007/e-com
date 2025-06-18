@@ -24,7 +24,7 @@ function AdminSideMenu(){
             <FontAwesomeIcon icon={faBox} />
             {isOpen && <span>products</span>}
           </Link>
-          <Link href="/admin/settings" className="flex items-center space-x-3 hover:bg-gray-700 p-2 rounded">
+          <Link href="/admin/gallery" className="flex items-center space-x-3 hover:bg-gray-700 p-2 rounded">
             <FontAwesomeIcon icon={faImage} />
             {isOpen && <span>Gallery</span>}
           </Link>

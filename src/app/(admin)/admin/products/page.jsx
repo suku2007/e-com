@@ -10,14 +10,19 @@ const [products, setProducts] = useState ([]);
     }, []);
 
     async function getProducts(){
-        const fetchingData = await fetch('https://ecom.zoparet.com/product');
+        const fetchingData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product`);
         const res = await fetchingData.json();
         setProducts(res);
     }
 
     return(
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4 text-gray-800">Product Listings</h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-bold mb-4 text-gray-800">Product Listings</h1>
+                <Link className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" href="/admin/products/add">
+                Add Product
+                </Link>
+            </div>
             <div className="overflow-x-auto rounded-xl shadow border border-gray-200">
                 <table className="min-w-full bg-white text-left text-sm text-gray-700">
                 <thead className="bg-gray-50 border-b text-xs font-semibold text-gray-600 uppercase">

@@ -22,7 +22,6 @@ const SearchBar = () => {
   }, [searchTerm])
   
   function handleShowFilter(){
-    console.log('clickwed');
     setPopup(true);
 
   }

@@ -17,7 +17,7 @@ const Header = () => {
   const showAdminHeader = pathname.includes('/admin');
 
   useEffect(()=>{
-    console.log(user);
+
     if((pathname == '/login') && user){
       
         router.push('/admin');
